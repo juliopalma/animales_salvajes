@@ -1,6 +1,6 @@
 import Animal from './Animal.js'
 
-class Leon extends Animal {
+export default class Leon extends Animal {
 
     rugir() {
 
