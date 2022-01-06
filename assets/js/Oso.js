@@ -6,10 +6,11 @@ export default class Oso extends Animal {
         super(nombre, edad, 'assets/imgs/Oso.jpg', comentarios, 'assets/sounds/Gruñido.mp3')
     }
 
-    gruñir() {
+    async gruñir() {
         const player = document.getElementById('player');
         player.innerHTML = `<source src="${this.sonido}" type="audio/mpeg">`;
-        player.play();
+        await player.load();
+        await player.play();
     }
 
 }

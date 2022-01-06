@@ -6,10 +6,11 @@ export default class Lobo extends Animal {
         super(nombre, edad, 'assets/imgs/Lobo.jpg', comentarios, 'assets/sounds/Aullido.mp3')
     }
 
-    aullar() {
+    async aullar() {
         const player = document.getElementById('player');
         player.innerHTML = `<source src="${this.sonido}" type="audio/mpeg">`;
-        player.play();
+        await player.load();
+        await player.play();
     }
 
 }

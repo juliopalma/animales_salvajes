@@ -6,10 +6,11 @@ export default class Leon extends Animal {
         super(nombre, edad, 'assets/imgs/Leon.png', comentarios, 'assets/sounds/Rugido.mp3')
     }
 
-    rugir() {
+    async rugir() {
         const player = document.getElementById('player');
         player.innerHTML = `<source src="${this.sonido}" type="audio/mpeg">`;
-        player.play();
+        await player.load();
+        await player.play();
     }
 
 }

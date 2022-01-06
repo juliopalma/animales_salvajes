@@ -6,10 +6,11 @@ export default class Aguila extends Animal {
         super(nombre, edad, 'assets/imgs/Aguila.png', comentarios, 'assets/sounds/Chillido.mp3')
     }
 
-    chillar() {
+    async chillar() {
         const player = document.getElementById('player');
         player.innerHTML = `<source src="${this.sonido}" type="audio/mpeg">`;
-        player.play();
+        await player.load();
+        await player.play();
     }
 
 }

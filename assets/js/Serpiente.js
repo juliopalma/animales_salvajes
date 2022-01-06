@@ -6,10 +6,11 @@ export default class Serpiente extends Animal {
         super(nombre, edad, 'assets/imgs/Serpiente.jpg', comentarios, 'assets/sounds/Siseo.mp3')
     }
 
-    sisear() {
+    async sisear() {
         const player = document.getElementById('player');
         player.innerHTML = `<source src="${this.sonido}" type="audio/mpeg">`;
-        player.play();
+        await player.load();
+        await player.play();
     }
 
 }
