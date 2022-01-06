@@ -1,4 +1,9 @@
 import Leon from './Leon.js'
+import Lobo from './Lobo.js'
+import Oso from './Oso.js'
+import Serpiente from './Serpiente.js'
+import Aguila from './Aguila.js'
+
 
 (async function() {
     const data = await fetch('data/animales.json');
@@ -57,42 +62,83 @@ $('#btnRegistrar').on('click', function() {
         if (selectAnimal == "Leon") {
             srcAnimal = "assets/imgs/Leon.png";
             sonido = "assets/sounds/Rugido.mp3";
-            animal = new Leon(selectAnimal, edad_animal, srcAnimal, comentario, sonido);
+            animal = new Leon(selectAnimal, edad_animal, comentario);
 
         } else if (selectAnimal == "Lobo") {
 
             srcAnimal = "assets/imgs/Lobo.jpg";
             sonido = "assets/sounds/Aullido.mp3";
+            animal = new Lobo(selectAnimal, edad_animal, comentario);
 
         } else if (selectAnimal == "Oso") {
 
             srcAnimal = "assets/imgs/Oso.jpg";
             sonido = "assets/sounds/Gruñido.mp3";
+            animal = new Oso(selectAnimal, edad_animal, comentario);
 
         } else if (selectAnimal == "Serpiente") {
 
             srcAnimal = "assets/imgs/Serpiente.jpg";
             sonido = "assets/sounds/Siseo.mp3";
+            animal = new Serpiente(selectAnimal, edad_animal, comentario);
 
         } else if (selectAnimal == "Aguila") {
 
             srcAnimal = "assets/imgs/Aguila.png";
             sonido = "assets/sounds/Chillido.mp3";
+            animal = new Aguila(selectAnimal, edad_animal, comentario);
 
         }
 
-        $("#Animales").append(
-            `<div class="card" style="margin-right: 20px; width: 200px; margin-left: 20px;">
-            <img src="${srcAnimal}" class="card-img-top" alt="...">
-            <div class="card-body">
-            <audio src="${sonido}" id="sonidoDeAnimal" preload="none" controls style="width: -webkit-fill-available;"></audio>
-            </div>
-          </div>`
-        );
+        arrayAnimales.push(animal);
+        dibAnimales(arrayAnimales);
 
     }
 
     $('#comentarios').val('');
     $("#animal").prop("selectedIndex", 0);
     $("#edad").prop("selectedIndex", 0);
+    $('#preview').css('background-image', ``);
 });
+
+function dibAnimales(animales) {
+
+    $("#Animales").html("");
+
+    for (let i = 0; i < animales.length; i++) {
+        let animal = animales[i];
+
+        $("#Animales").append(
+            `<div class="card" style="margin-right: 20px; width: 200px; margin-left: 20px;">
+            <img src="${animal.img}" class="card-img-top" alt="...">
+            <div class="card-body">
+            
+            <button onclick="sonar(${i})" id="btnSonar" style="background-image: url(assets/imgs/audio.svg);"></button>
+           
+            <audio src="${animal.sonido}" id="sonidoDeAnimal" preload="none" controls style="width: -webkit-fill-available;"></audio>
+            
+            </div>
+          </div>`
+        );
+    }
+}
+
+window.sonar = (pos) => {
+    let animal = arrayAnimales[pos];
+    console.log(animal);
+
+    // alert(animal.nombre);
+
+    if (animal.nombre == "Oso") {
+        animal.gruñir();
+    } else if (animal.nombre == "Leon") {
+        animal.rugir();
+    } else if (animal.nombre == "Serpiente") {
+        animal.sisear();
+    } else if (animal.nombre == "Lobo") {
+        animal.aullar()
+    } else if (animal.nombre == "Aguila") {
+        animal.chillar();
+    }
+
+}

@@ -1,9 +1,15 @@
 import Animal from './Animal.js'
 
-class Aguila extends Animal {
+export default class Aguila extends Animal {
+
+    constructor(nombre, edad, comentarios) {
+        super(nombre, edad, 'assets/imgs/Aguila.png', comentarios, 'assets/sounds/Chillido.mp3')
+    }
 
     chillar() {
-
+        const player = document.getElementById('player');
+        player.innerHTML = `<source src="${this.sonido}" type="audio/mpeg">`;
+        player.play();
     }
 
 }

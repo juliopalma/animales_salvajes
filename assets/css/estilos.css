@@ -53,3 +53,8 @@ body {
 .card-img-top {
     height: 200px;
 }
+
+#btnSonar {
+    height: 30px;
+    width: 30px
+}
