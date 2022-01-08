@@ -110,7 +110,7 @@ function dibAnimales(animales) {
 
         $("#Animales").append(
             `<div class="card" style="margin-right: 20px; width: 200px; margin-left: 20px;">
-            <img src="${animal.img}" class="card-img-top" alt="...">
+            <img src="${animal.img}" data-i="${i}" class="card-img-top imganimal" alt="...">
             <div class="card-body">
             
             <button onclick="sonar(${i})" id="btnSonar" style="background-image: url(assets/imgs/audio.svg);"></button>
@@ -121,13 +121,15 @@ function dibAnimales(animales) {
           </div>`
         );
     }
+
+    $(".imganimal").on("click", mostrarModal)
+
+
 }
 
 window.sonar = (pos) => {
     let animal = arrayAnimales[pos];
     console.log(animal);
-
-    // alert(animal.nombre);
 
     if (animal.nombre == "Oso") {
         animal.gruñir();
@@ -140,5 +142,15 @@ window.sonar = (pos) => {
     } else if (animal.nombre == "Aguila") {
         animal.chillar();
     }
+
+}
+
+function mostrarModal(ev) {
+    const i = ev.target.dataset.i;
+
+    $("#exampleModal .modal-body").html();
+    $("#exampleModal").modal("show");
+
+
 
 }
